@@ -8,4 +8,4 @@ let l =
     Seq.initInfinite(fun index -> index + 2)
     |> Seq.filter(fun n -> (isPrime n))
 
-printfn "%A" (Seq.last (Seq.take 10001 l))
+printfn "%A" (Seq.item 10000 l)
