@@ -1,16 +1,22 @@
 let up n=
-    n / 2
+    n / 2L
 
 let down n=
-    n*3 + 1
+    n*3L + 1L
 
 let rec iterate n=
-    if n = 1 then
-        n
-    elif n % 2 = 0 then
-        iterate (up n)
+    if n = 1L then
+        seq {yield n}
+    elif n % 2L = 0L then
+        seq {yield n
+             yield! iterate (up n)}
     else
-        iterate (down n)
+        seq {yield n
+             yield! iterate (down n)}
 
-printfn "%A" 13
-printfn "%A" (iterate 13)
+let nums = [1L..10000L]
+let m =
+    nums
+    |> Seq.maxBy (fun index -> Seq.length (iterate index))
+
+printfn "%A" m
